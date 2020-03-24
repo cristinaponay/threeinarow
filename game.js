@@ -112,21 +112,13 @@ window.onload = function () {
     // finds 3-in-a-row
     let find3InARow = () => {
         for (let i in states) {
-            let rows = [];
             for (let j in states[i]) {
                 if (states[i][j] !== 0) {
-                    if (j != 0 && states[i][j - 1] === states[i][j]) {
-                        if (rows.length === 0) {
-                            rows.push(states[i][j - 1]);
-                        }
-                        rows.push(states[i][j]);
+                    if (j != 0 && (states[i][j - 1] === states[i][j] && states[i][j] === states[i][j + 1])) {
+                        console.log(states[i][j - 1] + " <-> " + states[i][j] + " <-> " + states[i][j + 1]);
+                        return true;
                     }
                 }
-            }
-            if (rows.length > 2) {
-                this.console.log(rows);
-                rows = [];
-                return true;
             }
         }
         return false;
