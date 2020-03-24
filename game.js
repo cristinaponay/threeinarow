@@ -30,34 +30,47 @@ window.onload = function () {
     };
 
     let table = document.createElement('table');
-    let innerDiv = document.createElement('div');
-    // append table to inner div
-    innerDiv.appendChild(table);
+    // append table to theGame
+    theGame.appendChild(table);
+
+    let objective = document.createElement('p');
+    objective.innerHTML = "<strong>Game Objective</strong>: Fill the grid with equal number of pink and green \
+    squares on each row and column. A 3-in-a-row of the same color is not allowed.";
+    // append instructions text to theGame
+    theGame.appendChild(objective);
 
     let result = document.createElement('p');
-    result.innerHTML = " ";
-    // append result text to inner div
-    innerDiv.appendChild(result);
+    result.innerHTML = "Good luck!";
+    // append result text to theGame
+    theGame.appendChild(result);
 
     let button = document.createElement('button');
     button.innerHTML = "Check";
 
-    let checking = document.createElement('div');
-    checking.setAttribute("id", "errorCheck");
+    let button2 = document.createElement('button');
+    button2.innerHTML = "Reset";
+
+    let btnGroup = document.createElement('div');
+    btnGroup.className = "buttons";
+
+    btnGroup.appendChild(button);
+    btnGroup.appendChild(button2);
+
+    let errorCheckGroup = document.createElement('div');
+    errorCheckGroup.setAttribute("id", "errorCheck");
 
     let checkbox = document.createElement('input');
     checkbox.setAttribute("type", "checkbox");
-    checking.appendChild(checkbox);
+    errorCheckGroup.appendChild(checkbox);
 
     let span = document.createElement('span');
     span.innerHTML = "Show mistakes when checking";
-    checking.appendChild(span);
+    errorCheckGroup.appendChild(span);
 
-    innerDiv.appendChild(button);
-    innerDiv.appendChild(checking);
+    // append inner divs to theGame
+    theGame.appendChild(btnGroup);
+    theGame.appendChild(errorCheckGroup);
 
-    // append inner div to #theGame
-    gameNode.appendChild(innerDiv);
 
     // req-006 add innovative feature
     let setState = () => {
@@ -109,19 +122,27 @@ window.onload = function () {
         }
     };
 
-    // finds 3-in-a-row
+    // finds 3-in-a-row or 3-in-a-column
     let find3InARow = () => {
         for (let i = 0; i < states.length; i++) {
             for (let j = 0; j < states[i].length; j++) {
                 if (states[i][j] !== 0) {
-                    if (j != 0 && (states[i][j - 1] === states[i][j] && states[i][j] === states[i][j + 1])) {
+                    if (j !== 0 && (states[i][j - 1] === states[i][j] && states[i][j] === states[i][j + 1])) {
                         console.log(states[i][j - 1] + " <-> " + states[i][j] + " <-> " + states[i][j + 1]);
+                        return true;
+                    }
+                    if (i !== 0 && (i + 1) < states.length && (states[i - 1][j] === states[i][j] && states[i][j] === states[i + 1][j])) {
+                        console.log(states[i - 1][j] + " <-> " + states[i][j] + " <-> " + states[i + 1][j]);
                         return true;
                     }
                 }
             }
         }
         return false;
+    };
+
+    button2.onclick = () => {
+        this.location.reload();
     };
 
 
@@ -228,7 +249,6 @@ window.onload = function () {
                                         }
                                     }
                                     else if (curr === corr && !foundX) {
-
                                         if (done) {
                                             result.innerHTML = "You did it!";
                                             result.className = "done";
