@@ -1,20 +1,26 @@
 body {
     color: #080F0F;
     font-family: 'Lucida Sans', 'Lucida Sans Regular';
+    text-align: center;
+    margin: 0 auto;
 }
 
 h1 {
     text-align: center;
 }
 
+/* the game div */
 #theGame {
-    /* margin: 0 auto; */
+    display: inline-block;
+    padding: 20px;
+    background-color: #d01c8b;
+    border-radius: 2px 35px;
     text-align: center;
 }
 
 #theGame table {
-    /* border-collapse: collapse; */
     border-spacing: 1px;
+    display: inline-block;
 }
 
 #theGame td {
@@ -32,64 +38,71 @@ h1 {
     color: white;
 }
 
-button {
-    margin-top: 15px;
-    display: block;
+#theGame p {
+    background-color: #fde0ef;
+    padding: 3px;
+    font-size: 13px;
+    width: 320px;
+    /* display: inline-block; */
+    text-align: center;
+}
+
+#theGame p.wrong {
+    background-color: #f7f7f7;
+    color: red;
+}
+
+#theGame p.correct {
+    background-color: #f7f7f7;
+    color: green;
+}
+
+#theGame p.done {
+    background-color: #f7f7f7;
+    color: green;
+    font-size: 20px;
     font-weight: bold;
-    border-radius: 8px;
-    background-color: #b8e186;
-    color: #d01c8b;
+}
+
+
+#errorCheck {
+    display: inline-block;
+    margin: 10px;
+}
+
+
+.buttons button {
+    display: inline-block;
+}
+
+button {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #4dac26;
+    color: #f7f7f7;
     border: none;
     width: 100px;
     padding: 5px;
 }
 
 button:active, button:focus{
-    background-color: #b8e186;
+    background-color: #4dac26;
     border: none;
     outline: none;
 }
 
 button:hover {
-    background-color: #4dac26;
-    color: #f7f7f7;
+    background-color: #b8e186;
+    color: #d01c8b;
     border: none;
 }
 
-#theGame div {
-    display: inline-block;
-    padding: 25px;
-    background-color: #d01c8b;
-    border-radius: 2px 35px;
-}
-
-p {
-    padding: 5px;
-    font-size: 13px;
-}
-
-p.wrong {
-    background-color: #f7f7f7;
-    color: red;
-}
-
-p.correct {
-    background-color: #f7f7f7;
-    color: green;
-}
-
-p.done {
-    background-color: #f7f7f7;
-    color: green;
-    font-weight: bold;
-}
-
-#errorCheck {
-    /* float: left; */
-    font-family: Verdana, Arial, sans-serif;
+span {
     font-size: 12px;
     text-align: left;
-    vertical-align: auto;
 }
 
 .error {
