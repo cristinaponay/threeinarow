@@ -1,0 +1,98 @@
+body {
+    color: #080F0F;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular';
+}
+
+h1 {
+    text-align: center;
+}
+
+#theGame {
+    /* margin: 0 auto; */
+    text-align: center;
+}
+
+#theGame table {
+    /* border-collapse: collapse; */
+    border-spacing: 1px;
+}
+
+#theGame td {
+    background-color: #f7f7f7;
+    border: 2px solid #f7f7f7;
+    padding: 8px;
+    width: 25px;
+    height: 25px;
+}
+
+#theGame .counter {
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    color: white;
+}
+
+button {
+    margin-top: 15px;
+    display: block;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #b8e186;
+    color: #d01c8b;
+    border: none;
+    width: 100px;
+    padding: 5px;
+}
+
+button:active, button:focus{
+    background-color: #b8e186;
+    border: none;
+    outline: none;
+}
+
+button:hover {
+    background-color: #4dac26;
+    color: #f7f7f7;
+    border: none;
+}
+
+#theGame div {
+    display: inline-block;
+    padding: 25px;
+    background-color: #d01c8b;
+    border-radius: 2px 35px;
+}
+
+p {
+    padding: 5px;
+    font-size: 13px;
+}
+
+p.wrong {
+    background-color: #f7f7f7;
+    color: red;
+}
+
+p.correct {
+    background-color: #f7f7f7;
+    color: green;
+}
+
+p.done {
+    background-color: #f7f7f7;
+    color: green;
+    font-weight: bold;
+}
+
+#errorCheck {
+    /* float: left; */
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    vertical-align: auto;
+}
+
+.error {
+    font-size: 15px;
+    color: red;
+}
