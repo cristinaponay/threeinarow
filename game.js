@@ -111,8 +111,8 @@ window.onload = function () {
 
     // finds 3-in-a-row
     let find3InARow = () => {
-        for (let i in states) {
-            for (let j in states[i]) {
+        for (let i = 0; i < states.length; i++) {
+            for (let j = 0; j < states[i].length; j++) {
                 if (states[i][j] !== 0) {
                     if (j != 0 && (states[i][j - 1] === states[i][j] && states[i][j] === states[i][j + 1])) {
                         console.log(states[i][j - 1] + " <-> " + states[i][j] + " <-> " + states[i][j + 1]);
