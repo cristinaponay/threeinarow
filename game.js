@@ -73,6 +73,7 @@ window.onload = function () {
 
 
     // req-006 add innovative feature
+    // sets the numbers of pink and green boxes
     let setState = () => {
         // show row states
         let row_ctr = states.map((row) => {
@@ -94,7 +95,7 @@ window.onload = function () {
         });
 
         for (let i = 0; i < row_ctr.length; i++) {
-            table.rows[i + 1].cells[6].innerHTML = row_ctr[i];
+            table.rows[i + 1].cells[row_ctr.length].innerHTML = row_ctr[i];
         }
 
         // show column states
@@ -145,33 +146,35 @@ window.onload = function () {
         this.location.reload();
     };
 
-
+    let fetchURL = 'https://www.mikecaines.com/3inarow/8x8a.php';
+    // let fetchURL = 'https://www.mikecaines.com/3inarow/sample.json';
     // req-001 retrieval of the json starting data for the puzzle
     let fetchData = async () => {
-        fetch('https://www.mikecaines.com/3inarow/sample.json')
+        fetch(fetchURL)
             .then((response) => response.json())
             .then((myJson) => {
 
                 let puzzle = myJson.rows;
                 let x = 0, y = 0;
-
+                let len = puzzle.length;
+                
                 // req-002 drawing and displaying of 3-in-a-row table with js 
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i <= len; i++) {
                     let tr = document.createElement('tr');
                     let temp = [];
-
-                    for (let j = 0; j < 7; j++) {
+                    
+                    for (let j = 0; j <= len; j++) {
                         // create cell
                         let td = document.createElement('td');
                         x = i - 1;
                         y = j;
 
-                        if (i === 0 || j === 6) {
-                            td.innerHTML = (i === 0 && j === 6) ? "" : "1/1";
+                        if (i === 0 || j === len) {
+                            td.innerHTML = (i === 0 && j === len) ? "" : "1/1";
                             td.className = "counter";
                         }
                         else {
-                            if (j < 6) {
+                            if (j < len) {
                                 // set initial state
                                 td.style.backgroundColor = colors[puzzle[x][y].currentState];
                                 temp.push(puzzle[x][y].currentState);
@@ -186,7 +189,7 @@ window.onload = function () {
                             x = i - 1;
                             y = j;
 
-                            if (j < 6) {
+                            if (j < len) {
                                 if (puzzle[x][y].canToggle) {
                                     let prop = window.getComputedStyle(td, null).getPropertyValue('background-color');
                                     td.style.backgroundColor = setBgColor(rgbToHex(prop));
@@ -224,10 +227,10 @@ window.onload = function () {
                             x = i - 1;
                             y = j;
 
-                            if (i === 0 || j === 6) {
+                            if (i === 0 || j === len) {
                                 continue;
                             }
-                            if (j < 6) {
+                            if (j < len) {
                                 let corr = puzzle[x][y].correctState;
                                 let curr = states[x][y];
                                 let td = table.rows[i].cells[j];
