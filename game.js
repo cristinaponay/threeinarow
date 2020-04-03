@@ -205,7 +205,7 @@ window.onload = function () {
                                     td.style.backgroundColor = setBgColor(rgbToHex(prop));
                                     if(easter.checked) { // Easter special
                                         td.style.backgroundImage = images[state];
-                                        td.style.backgroundSize = "contain";
+                                        td.style.backgroundSize = "cover";
                                     }
                                     states[x][y] = state;
                                     setState();
@@ -245,7 +245,7 @@ window.onload = function () {
                                 }
                                 else {
                                     td.style.backgroundImage = images[curr];
-                                    td.style.backgroundSize = "contain";
+                                    td.style.backgroundSize = "cover";
                                 }
                             }
                         }
