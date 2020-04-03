@@ -9,6 +9,7 @@ window.onload = function () {
     document.body.insertBefore(h1, gameNode);
 
     let colors = ['#f7f7f7', '#f1b6da', '#b8e186']; // state 0: light grey, state 1: pink, state 2: lime
+    let images = ["", "url('egg1.png')", "url('egg3.png')"];
     let state = 0;
     let states = [];
 
@@ -66,6 +67,15 @@ window.onload = function () {
     let span = document.createElement('span');
     span.innerHTML = "Show mistakes when checking";
     errorCheckGroup.appendChild(span);
+
+    // Easter special
+    let easter = document.createElement('input');
+    easter.setAttribute("type", "checkbox");
+    errorCheckGroup.appendChild(easter);
+
+    let span2 = document.createElement('span');
+    span2.innerHTML = "<strong>Easter special!</strong>";
+    errorCheckGroup.appendChild(span2);
 
     // append inner divs to theGame
     theGame.appendChild(btnGroup);
@@ -193,6 +203,10 @@ window.onload = function () {
                                 if (puzzle[x][y].canToggle) {
                                     let prop = window.getComputedStyle(td, null).getPropertyValue('background-color');
                                     td.style.backgroundColor = setBgColor(rgbToHex(prop));
+                                    if(easter.checked) { // Easter special
+                                        td.style.backgroundImage = images[state];
+                                        td.style.backgroundSize = "contain";
+                                    }
                                     states[x][y] = state;
                                     setState();
                                     td.innerHTML = "";
@@ -210,6 +224,33 @@ window.onload = function () {
                     table.appendChild(tr);
                 }
                 setState();
+
+                // Easter special!
+                easter.onchange = () => {
+                    for (let i = 0; i < table.rows.length; i++) {
+                        for (let j = 0; j < table.rows[i].cells.length; j++) {
+                            // get correct state
+                            x = i - 1;
+                            y = j;
+                            if (i === 0 || j === len) {
+                                continue;
+                            }
+                            if (j < len) {
+                                let corr = puzzle[x][y].correctState;
+                                let curr = states[x][y];
+                                let td = table.rows[i].cells[j];
+
+                                if (!easter.checked) {
+                                    td.style.backgroundImage = "";
+                                }
+                                else {
+                                    td.style.backgroundImage = images[curr];
+                                    td.style.backgroundSize = "contain";
+                                }
+                            }
+                        }
+                    }
+                };
 
                 // req-004 3-in-a-row puzzle status checking
                 button.onclick = function () {
@@ -237,6 +278,9 @@ window.onload = function () {
 
                                 td.innerHTML = "";
                                 td.style.borderColor = "#f7f7f7";
+                                if (easter.checked) {
+                                    td.style.backgroundImage = images[curr];
+                                }
 
                                 if (puzzle[x][y].canToggle) {
                                     if (curr !== corr && curr !== 0) {
@@ -249,6 +293,10 @@ window.onload = function () {
                                             td.innerHTML = "x";
                                             td.className = "error";
                                             td.style.borderColor = "red";
+                                            if (easter.checked) {
+                                                td.innerHTML = "";
+                                                td.style.backgroundImage = "url('bunny.png')";
+                                            }
                                         }
                                     }
                                     else if (curr === corr && !foundX) {
